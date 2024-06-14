@@ -25,7 +25,14 @@ public class ClienteServicio {
 		
 	}
 	
-	public void agregarCliente(Cliente cliente) {
+	public String agregarCliente(Cliente cliente) {
+		if (cliente == null || cliente.getAniosCliente()== null || cliente.getApellidoCliente()==null || cliente.getNombreCategoria() ==null || cliente.getNombreCliente() == null || cliente.getRunCliente() == null) {
+			return "Los datos del cliente no son correctos.";
+		
+		}else {
+			listaClientes.add(cliente);
+			return "Se ha agregado exitosamente el Cliente";
+		}
 		
 	}
 	

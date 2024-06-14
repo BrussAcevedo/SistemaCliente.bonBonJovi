@@ -1,8 +1,20 @@
 package cl.bonBonJovi.modelo;
 
-public class CategoriaEnum {
+public enum CategoriaEnum {
 
-	String Activo;
-	String Inactivo;
+	ACTIVO("Activo"),
+	INACTIVO("Activo"),
+	SC("SinCategoria");
+	
+	private final String descripcion;
+
+	private CategoriaEnum(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
 	
 }

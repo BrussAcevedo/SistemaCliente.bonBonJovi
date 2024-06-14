@@ -4,10 +4,10 @@ public class Cliente {
 	String runCliente;
 	String nombreCliente;
 	String apellidoCliente;
-	Integer aniosCliente;
+	String aniosCliente;
 	CategoriaEnum nombreCategoria;
-	public Cliente(String runCliente, String nombreCliente, String apellidoCliente, Integer aniosCliente,
-			CategoriaEnum nombreCategoria) {
+	
+	public Cliente(String runCliente, String nombreCliente, String apellidoCliente, String aniosCliente, CategoriaEnum nombreCategoria) {
 		this.runCliente = runCliente;
 		this.nombreCliente = nombreCliente;
 		this.apellidoCliente = apellidoCliente;
@@ -32,10 +32,10 @@ public class Cliente {
 	public void setApellidoCliente(String apellidoCliente) {
 		this.apellidoCliente = apellidoCliente;
 	}
-	public Integer getAniosCliente() {
+	public String getAniosCliente() {
 		return aniosCliente;
 	}
-	public void setAniosCliente(Integer aniosCliente) {
+	public void setAniosCliente(String aniosCliente) {
 		this.aniosCliente = aniosCliente;
 	}
 	public CategoriaEnum getNombreCategoria() {
@@ -44,13 +44,16 @@ public class Cliente {
 	public void setNombreCategoria(CategoriaEnum nombreCategoria) {
 		this.nombreCategoria = nombreCategoria;
 	}
-	
 	@Override
 	public String toString() {
 		return "Cliente [runCliente=" + runCliente + ", nombreCliente=" + nombreCliente + ", apellidoCliente="
 				+ apellidoCliente + ", aniosCliente=" + aniosCliente + ", nombreCategoria=" + nombreCategoria + "]";
 	}
 	
+	public String toStringSimple() {
+		return runCliente + ", "+ nombreCliente + ", "+ apellidoCliente +  ", "+ aniosCliente +", "+ nombreCategoria ;
+	}
+
 	
 	
 

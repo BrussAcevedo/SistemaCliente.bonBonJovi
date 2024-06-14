@@ -1,16 +1,47 @@
 package cl.bonBonJovi.servicio;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import cl.bonBonJovi.modelo.Cliente;
+import cl.bonBonJovi.utilidades.Utilidad;
 
 public class ExportarTxt extends Exportador{
 
 	
 	
 	@Override
-	public void exportar(String filename, List<Cliente> listaclientes) {
+	public void exportar(String ruta, String filename, List<Cliente> listaclientes) {
+		File file = new File(ruta + "/"+filename+".txt"); // Ruta sugerida //"src/main/java/cl/bonBonJovi/archivosExportados"
+		
+		if (!file.exists()) {
+			Utilidad.crearCarpeta(ruta);
+			Utilidad.crearArchivoTxt(ruta, filename);	
+		}
+		
+		if(file.exists()){
+			
+			try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw);){
+				for (Cliente cliente: listaclientes) {
+					bw.write(cliente.toStringSimple());
+					bw.newLine();
+				}			
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		
 	}
+
+	
+	
+	
+	
 	
 }

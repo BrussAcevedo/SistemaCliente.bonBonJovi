@@ -6,6 +6,6 @@ import cl.bonBonJovi.modelo.Cliente;
 
 public abstract class Exportador {
 	
-	public abstract void exportar(String filename, List<Cliente> listaclientes);
+	public abstract void exportar(String ruta, String filename, List<Cliente> listaclientes);
 	
 }
