@@ -3,7 +3,7 @@ package cl.bonBonJovi.modelo;
 public enum CategoriaEnum {
 
 	ACTIVO("Activo"),
-	INACTIVO("Activo"),
+	INACTIVO("Inactivo"),
 	SC("SinCategoria");
 	
 	private final String descripcion;

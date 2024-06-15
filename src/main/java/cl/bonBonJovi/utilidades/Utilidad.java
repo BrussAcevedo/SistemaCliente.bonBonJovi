@@ -52,5 +52,13 @@ public class Utilidad {
 		}
 
 	}
+	
+	public static void delay3000() {
+		try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+	}
 
 }
