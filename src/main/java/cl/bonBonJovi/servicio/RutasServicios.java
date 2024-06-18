@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class RutasServicios {
 		File file = new File(ruta + "/" + filename + ".txt");
 
 		if (!file.exists()) {
-
+			
 			Utilidad.crearCarpeta(ruta);
 			Utilidad.crearArchivoTxt(ruta, filename);
 		}
@@ -169,11 +170,54 @@ public class RutasServicios {
 			System.out.println("Error: La lista esta Vacia.");
 		}
 	
-		
-		
-		
 	}
 	
+	public static ArrayList<Cliente> allArchivosToArrayList(List<String> rutas) {
+		ArrayList<Cliente> allExportClientes = new ArrayList<>();
+		allExportClientes.clear();
+		CategoriaEnum categoria = CategoriaEnum.SC;
+	
+		for (String ruta: rutas) {
+				
+			File fl = new File(ruta);
+			System.out.println();
+			if(fl.exists()&& fl.isFile()) {
+				
+				try(FileReader fr = new FileReader(fl);BufferedReader br = new BufferedReader(fr);) {
+					String linea;
+					
+					while((linea= br.readLine())!=null) {
+						
+						String[] parte = linea.split(",");
+						
+						if (parte[4].trim().toString().equalsIgnoreCase("Activo")) {
+							categoria = CategoriaEnum.ACTIVO;
+							
+						} else if (parte[4].trim().toString().equalsIgnoreCase("Inactivo")) {
+							categoria = CategoriaEnum.INACTIVO;
+						}		
+						
+						Cliente cliente = new Cliente(parte[0].trim(), parte[1].trim(), parte[2].trim(), parte[3].trim(), categoria);
+						allExportClientes.add(cliente);
+					}		
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}else {
+				System.out.println("Error: Nose encuentra la ruta o el archivo esta Vacío: "+ fl);
+			}
 
+		}
+		
+		return allExportClientes;
+	}
+
+		
+		
+		
+		
+	
 
 }

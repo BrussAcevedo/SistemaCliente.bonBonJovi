@@ -35,11 +35,6 @@ public class Menu {
 
 
 	public void menuPrincipal() {
-		Cliente cliente1 = new Cliente("4655623", "juan", "Juanete", "5 Anios", CategoriaEnum.ACTIVO);
-		Cliente cliente2 = new Cliente("46545545", "Carlos", "Carlete", "6 Anios", CategoriaEnum.INACTIVO);
-		
-		listaNoExportada.add(cliente1);
-		listaNoExportada.add(cliente2);
 
 		
 		RutasServicios.importarRutas("src/main/java/cl/bonBonJovi/archivos/rutas", "rutasExport", listaDeRutas);
@@ -99,12 +94,17 @@ public class Menu {
 	}
 
 	public void listarCliente() {
-
-		if (!listaExportada.isEmpty()) {
+		ArrayList<Cliente> todoExportList = new ArrayList<>();
+		
+		todoExportList.clear();
+		todoExportList = RutasServicios.allArchivosToArrayList(listaDeRutas);
+		clienteServExpTemp = new ClienteServicio(todoExportList);
+		
+		if (!todoExportList.isEmpty()) {
 			System.out.println("Lista Guardada en datos Exportados:");
-			clienteServExp.retornoListarClientes();
+			clienteServExpTemp.retornoListarClientes();
 			System.out.println("----------------------------------------------");
-		} else if (listaExportada.isEmpty()) {
+		} else if (todoExportList.isEmpty()) {
 			System.out.println("Datos Exportados: No hay datos.");
 			System.out.println("----------------------------------------------");
 		}
@@ -112,7 +112,7 @@ public class Menu {
 			System.out.println("Lista de datos sin Exportar: ");
 			clienteServNoExp.retornoListarClientes();
 			System.out.println("----------------------------------------------");
-		} else if (listaExportada.isEmpty()) {
+		} else if (listaNoExportada.isEmpty()) {
 			System.out.println("Datos sin Exportar: No hay datos.");
 			System.out.println("----------------------------------------------");
 			System.out.println();
@@ -121,31 +121,21 @@ public class Menu {
 	}
 
 	public void agregarCliente() {
-
-		String rut = null;
-		String nombre = null;
-		String apellido = null;
-		String anios = null;
-		Cliente nuevoCliente = new Cliente(rut, nombre, apellido, anios, CategoriaEnum.SC);
+		Cliente nuevoCliente = null;
 
 		System.out.println("------------Agregar Nuevo Cliente---------------");
-
+		
 		System.out.println("Ingresa RUN del Cliente:");
-		rut = scan.nextLine();
-		nuevoCliente.setRunCliente(rut);
+		String rut = scan.nextLine();
 		System.out.println("Ingresa Nombre del Cliente:");
-		nombre = scan.nextLine();
-		nuevoCliente.setNombreCliente(nombre);
+		String nombre = scan.nextLine();
 		System.out.println("Ingresa Apellido del Cliente:");
-		apellido = scan.nextLine();
-		nuevoCliente.setApellidoCliente(apellido);
+		String apellido = scan.nextLine();
 		System.out.println("Ingresa años como Cliente: ");
-		anios = scan.nextLine();
-		nuevoCliente.setAniosCliente(anios);
-		nuevoCliente.setNombreCategoria(CategoriaEnum.ACTIVO);
+		String anios = scan.nextLine();
 
 		System.out.println("Nota: los clientes nuevos ingresados tienen categoria de ACTIVO.");
-
+		nuevoCliente = new Cliente(rut, nombre, apellido, anios, CategoriaEnum.ACTIVO);
 		clienteServNoExp.agregarCliente(nuevoCliente);
 
 		System.out.println();

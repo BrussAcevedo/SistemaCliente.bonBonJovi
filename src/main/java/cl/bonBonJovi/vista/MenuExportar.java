@@ -81,7 +81,7 @@ public class MenuExportar {
 								System.out.println("Aviso: El archivo existia previamente, los datos se han sobreescrito.");
 							}
 							String rutaFormatoExport= Utilidad.borrarFilenameRuta(listaDeRutas.get(rutaSelectInt));
-							exportarTxt.exportar(rutaFormatoExport, "Clientes.txt", clientePorExport);
+							exportarTxt.exportar(rutaFormatoExport, "Clientes", clientePorExport);
 							
 							
 						}else if(resultadoFormatoInt == 2) {
@@ -93,12 +93,12 @@ public class MenuExportar {
 								System.out.println("HOLA");
 								String rutaSinFilename = Utilidad.borrarFilenameRuta(listaDeRutas.get(rutaSelectInt));
 								System.out.println(rutaSinFilename);
-								listaDeRutas.add(rutaSinFilename+"/"+"Clientes.csv");
+								listaDeRutas.add(rutaSinFilename+"/"+"Clientes");
 							}else {
 								System.out.println("Aviso: El archivo existia previamente, los datos se han sobreescrito.");
 							}
 							String rutaFormatoExport= Utilidad.borrarFilenameRuta(listaDeRutas.get(rutaSelectInt));
-							exportarCsv.exportar(rutaFormatoExport, "Clientes.csv", clientePorExport);
+							exportarCsv.exportar(rutaFormatoExport, "Clientes", clientePorExport);
 						}else {
 							System.out.println("Formato no Válido.");
 							break;

@@ -14,7 +14,7 @@ public class ExportarCsv extends Exportador {
 	@Override
 
 	public void exportar(String ruta, String filename, List<Cliente> listaClientes) {
-		File file = new File(ruta + "/" + filename );
+		File file = new File(ruta + "/" + filename+".csv" );
 
 		if (!file.exists()) {
 			Utilidad.crearCarpeta(ruta);

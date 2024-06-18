@@ -1,2 +1,4 @@
-src/main/java/cl/bonBonJovi/archivos/Exportados/Clientes.txt
-C:/Users/Bruss Acevedo/Desktop/TestPrueba/Clientes.txt
+src\main\java\cl\bonBonJovi\archivos\Exportados\Clientes.txt
+C:\Users\Bruss Acevedo\Desktop\TestPrueba/Clientes.txt
+C:\Users\Bruss Acevedo\Desktop\TestPrueba\test2/Clientes.txt
+C:\Users\Bruss Acevedo\Desktop\TestPrueba\test2/Clientes.csv
