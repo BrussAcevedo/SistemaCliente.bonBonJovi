@@ -26,16 +26,13 @@ public class Menu {
 	
 	private ArchivoServicio importarDatos = new ArchivoServicio();
 	private MenuExportar rutasMenu = new MenuExportar();
-	
-	private ArchivoServicio leerDatosYaExportados = new ArchivoServicio();
-	private ExportarCsv exportadorCsv;
-	private ExportarTxt exportarTxt;
-	private String rutaImport;
-	private String rutaExport;
 
-	private Scanner scan = new Scanner(System.in);
+	private String rutaImport;
 	private String fileName = "Clientes";
 	private String fileName1 = "DBClientes.csv";
+
+	private Scanner scan = new Scanner(System.in);
+
 
 	public void menuPrincipal() {
 		Cliente cliente1 = new Cliente("4655623", "juan", "Juanete", "5 Anios", CategoriaEnum.ACTIVO);
@@ -304,6 +301,7 @@ public class Menu {
 			System.out.println("Ingrese el nuevo Nombre del cliente: ");
 			nuevoDato = scan.nextLine();
 			clienteServExpTemp.editarCliente(run, 2, nuevoDato);
+			RutasServicios.archivoExpUpdate(rutaBusqueda, listaTempExp);
 			clienteServNoExp.editarCliente(run, 2, nuevoDato);
 
 			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
@@ -329,6 +327,7 @@ public class Menu {
 			System.out.println("Ingrese el nuevo Apellido del cliente: ");
 			nuevoDato = scan.nextLine();
 			clienteServExpTemp.editarCliente(run, 3, nuevoDato);
+			RutasServicios.archivoExpUpdate(rutaBusqueda, listaTempExp);
 			clienteServNoExp.editarCliente(run, 3, nuevoDato);
 
 			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
@@ -354,6 +353,7 @@ public class Menu {
 			System.out.println("Ingrese el nuevo numero de años como cliente: ");
 			nuevoDato = scan.nextLine();
 			clienteServExpTemp.editarCliente(run, 4, nuevoDato);
+			RutasServicios.archivoExpUpdate(rutaBusqueda, listaTempExp);
 			clienteServNoExp.editarCliente(run, 4, nuevoDato);
 
 			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
