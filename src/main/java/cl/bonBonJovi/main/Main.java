@@ -20,16 +20,14 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		 Menu menu = new Menu();
-		 menu.menuPrincipal();
-
-	
-		
-		
-
-
-
-		
+		Menu menu = new Menu();
+		menu.menuPrincipal();
+		//String ruta = "C:\\Users\\Bruss Acevedo\\Desktop\\TestPrueba/Clientes.txt";
+		//if (ruta.contains("Clientes.txt")) {
+		//	System.out.println("Jelow");
+		//}else {
+		//	System.out.println("No paso.");
+		//}
 	}
 
 }

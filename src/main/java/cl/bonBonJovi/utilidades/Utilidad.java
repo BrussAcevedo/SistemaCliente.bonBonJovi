@@ -73,10 +73,10 @@ public class Utilidad {
 
 		if (carpeta.exists()) {
 			
-			System.out.println("flag");
 			try {
 
 				if (!fl.exists()) {
+					
 					fl.createNewFile();
 				}
 			} catch (IOException e) {

@@ -18,14 +18,13 @@ public class ArchivoServicio {
 		
 		CategoriaEnum categoria = CategoriaEnum.SC;
 		Cliente cliente;
-		File file = new File(rutaArchivo +"\\" + fileNameCsv+ ".csv");
+		File file = new File(rutaArchivo +"/" + fileNameCsv+ ".csv");
 	
 		try (FileReader fl = new FileReader(file); BufferedReader bf = new BufferedReader(fl);){
 			String linea;
 			while((linea = bf.readLine())!= null) {
 				String [] parte = linea.split(",");
-				
-				   
+	   
 				if (parte[4].equalsIgnoreCase("Activo")) {
 					categoria = CategoriaEnum.ACTIVO;
 				}else if(parte[4].trim().equalsIgnoreCase("Inactivo"))  {

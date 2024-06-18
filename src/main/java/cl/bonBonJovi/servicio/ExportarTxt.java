@@ -16,8 +16,7 @@ public class ExportarTxt extends Exportador{
 	@Override
 	public void exportar(String ruta, String filename, List<Cliente> listaClientes) {
 		
-		File file = new File(ruta + "/"+filename+".txt"); // Ruta sugerida //"src/main/java/cl/bonBonJovi/archivosExportados"
-
+		File file = new File(ruta + "/"+filename+".txt"); 
 		if (!file.exists()) {
 			
 			Utilidad.crearCarpeta(ruta);

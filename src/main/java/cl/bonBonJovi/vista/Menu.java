@@ -22,6 +22,8 @@ public class Menu {
 
 	private ClienteServicio clienteServNoExp = new ClienteServicio(listaNoExportada);
 	private ClienteServicio clienteServExp = new ClienteServicio(listaExportada);
+	private ClienteServicio clienteServExpTemp;
+	
 	private ArchivoServicio importarDatos = new ArchivoServicio();
 	private MenuExportar rutasMenu = new MenuExportar();
 	
@@ -36,15 +38,12 @@ public class Menu {
 	private String fileName1 = "DBClientes.csv";
 
 	public void menuPrincipal() {
-		Cliente cliente1 = new Cliente("46545545", "juan", "Juanete", "5 Anios", CategoriaEnum.ACTIVO);
+		Cliente cliente1 = new Cliente("4655623", "juan", "Juanete", "5 Anios", CategoriaEnum.ACTIVO);
 		Cliente cliente2 = new Cliente("46545545", "Carlos", "Carlete", "6 Anios", CategoriaEnum.INACTIVO);
 		
 		listaNoExportada.add(cliente1);
 		listaNoExportada.add(cliente2);
-		
-		
-		
-		
+
 		
 		RutasServicios.importarRutas("src/main/java/cl/bonBonJovi/archivos/rutas", "rutasExport", listaDeRutas);
 		
@@ -173,16 +172,24 @@ public class Menu {
 	}
 
 	public void editarClienteOpcionUno() {
+		ArrayList<Cliente> listaTempExp = new ArrayList<>();
+		
 		Cliente clienteAEditar;
 		String run;
 		System.out.println("Ingrese el RUN del cliente: ");
 		run = scan.nextLine();
-
+		String rutaBusqueda = RutasServicios.buscarEnRutasExp(run);
+		
+		listaTempExp = RutasServicios.rutaToArraylist(rutaBusqueda);
+		clienteServExpTemp = new ClienteServicio(listaTempExp);
 		clienteAEditar = (clienteServExp.buscarDatosCliente(run));
 
-		if (clienteAEditar == null) {
-			clienteAEditar = clienteServNoExp.buscarDatosCliente(run);
 
+		if (clienteAEditar == null) {
+
+			clienteServExpTemp = new ClienteServicio(listaTempExp);
+
+			clienteAEditar = (clienteServExpTemp.buscarDatosCliente(run));
 			if (clienteAEditar == null) {
 				System.out.println("No se encuentra el rut entregado.");
 				return;
@@ -204,16 +211,19 @@ public class Menu {
 		String respuesta = scan.nextLine();
 
 		if (respuesta.equals("1")) {
-			clienteServExp.editarCliente(run, 0, "Inactivo");
+			clienteServExpTemp.editarCliente(run, 0, "Inactivo");
+			RutasServicios.archivoExpUpdate(rutaBusqueda, listaTempExp);
 			clienteServNoExp.editarCliente(run, 0, "Inactivo");
+			
 		} else if (respuesta.equals("2")) {
-			clienteServExp.editarCliente(run, 0, "Activo");
+			clienteServExpTemp.editarCliente(run, 0, "Activo");
+			RutasServicios.archivoExpUpdate(rutaBusqueda, listaTempExp);
 			clienteServNoExp.editarCliente(run, 0, "Activo");
 		} else {
 			System.out.println("Dato no válido");
 		}
 
-		Cliente clienteEditado = clienteServExp.buscarDatosCliente(run);
+		Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
 		if (clienteEditado != null) {
 			System.out.println("-----------NuevosDatos-------------");
 			System.out.println("Nombre: " + clienteEditado.getNombreCliente());
@@ -231,12 +241,19 @@ public class Menu {
 	}
 
 	public void editarClienteOpcionDos() {
+
+		
 		Cliente clienteAEditar;
 		String run;
 		System.out.println("Ingrese el RUN del cliente: ");
 		run = scan.nextLine();
 
-		clienteAEditar = (clienteServExp.buscarDatosCliente(run));
+		ArrayList<Cliente> listaTempExp = new ArrayList<>();
+		String rutaBusqueda = RutasServicios.buscarEnRutasExp(run);
+		listaTempExp = RutasServicios.rutaToArraylist(rutaBusqueda);
+		clienteServExpTemp = new ClienteServicio(listaTempExp);
+		
+		clienteAEditar = (clienteServExpTemp.buscarDatosCliente(run));
 
 		if (clienteAEditar == null) {
 			clienteAEditar = clienteServNoExp.buscarDatosCliente(run);
@@ -262,15 +279,15 @@ public class Menu {
 		case "1": {
 			System.out.println("Ingrese el nuevo Run del cliente: ");
 			nuevoDato = scan.nextLine();
-			clienteServExp.editarCliente(run, 1, nuevoDato);
+			clienteServExpTemp.editarCliente(run, 1, nuevoDato);
 			clienteServNoExp.editarCliente(run, 1, nuevoDato);
 
-			Cliente clienteEditado = clienteServExp.buscarDatosCliente(run);
+			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
 			if (clienteEditado != null) {
 				System.out.println("-----------NuevosDatos-------------");
 				System.out.println("Nombre: " + clienteEditado.getNombreCliente());
 				System.out.println("RUN Cliente; " + clienteEditado.getRunCliente());
-
+				
 			}
 			Cliente clienteEditado2 = clienteServNoExp.buscarDatosCliente(run);
 			if (clienteEditado2 != null) {
@@ -286,10 +303,10 @@ public class Menu {
 
 			System.out.println("Ingrese el nuevo Nombre del cliente: ");
 			nuevoDato = scan.nextLine();
-			clienteServExp.editarCliente(run, 2, nuevoDato);
+			clienteServExpTemp.editarCliente(run, 2, nuevoDato);
 			clienteServNoExp.editarCliente(run, 2, nuevoDato);
 
-			Cliente clienteEditado = clienteServExp.buscarDatosCliente(run);
+			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
 			if (clienteEditado != null) {
 				System.out.println("-----------NuevosDatos-------------");
 				System.out.println("Nombre: " + clienteEditado.getNombreCliente());
@@ -311,10 +328,10 @@ public class Menu {
 
 			System.out.println("Ingrese el nuevo Apellido del cliente: ");
 			nuevoDato = scan.nextLine();
-			clienteServExp.editarCliente(run, 3, nuevoDato);
+			clienteServExpTemp.editarCliente(run, 3, nuevoDato);
 			clienteServNoExp.editarCliente(run, 3, nuevoDato);
 
-			Cliente clienteEditado = clienteServExp.buscarDatosCliente(run);
+			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
 			if (clienteEditado != null) {
 				System.out.println("-----------NuevosDatos-------------");
 				System.out.println("Nombre: " + clienteEditado.getNombreCliente());
@@ -336,10 +353,10 @@ public class Menu {
 
 			System.out.println("Ingrese el nuevo numero de años como cliente: ");
 			nuevoDato = scan.nextLine();
-			clienteServExp.editarCliente(run, 4, nuevoDato);
+			clienteServExpTemp.editarCliente(run, 4, nuevoDato);
 			clienteServNoExp.editarCliente(run, 4, nuevoDato);
 
-			Cliente clienteEditado = clienteServExp.buscarDatosCliente(run);
+			Cliente clienteEditado = clienteServExpTemp.buscarDatosCliente(run);
 			if (clienteEditado != null) {
 				System.out.println("-----------NuevosDatos-------------");
 				System.out.println("Nombre: " + clienteEditado.getNombreCliente());
