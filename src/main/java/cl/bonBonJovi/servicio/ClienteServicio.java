@@ -24,6 +24,7 @@ public class ClienteServicio {
 
 	public void retornoListarClientes() { // Recorrer cada uno de los clientes
 		String ruta = null;
+		
 		if (!lista.isEmpty()) {
 			for (Cliente cliente : this.lista) {
 				System.out.println();
@@ -34,7 +35,7 @@ public class ClienteServicio {
 				System.out.println("Años como Cliente: " + cliente.getAniosCliente());
 				System.out.println("Categoría del Cliente: " + cliente.getNombreCategoria());
 				ruta = RutasServicios.buscarEnRutasExp(cliente.getRunCliente());
-				if (!ruta.isEmpty()) {
+				if (ruta != null) {
 					System.out.println("Ruta: " + ruta);
 				}
 				System.out.println();

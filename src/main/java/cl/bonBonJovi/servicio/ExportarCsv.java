@@ -14,6 +14,7 @@ public class ExportarCsv extends Exportador {
 	@Override
 
 	public void exportar(String ruta, String filename, List<Cliente> listaClientes) {
+		List<Cliente> listaLectura;
 		File file = new File(ruta + "/" + filename+".csv" );
 
 		if (!file.exists()) {
@@ -22,7 +23,10 @@ public class ExportarCsv extends Exportador {
 		}
 
 		if (file.exists()) {
-
+			
+			listaLectura = RutasServicios.rutaToArraylist(ruta + "/"+filename+".csv" );
+			listaClientes.addAll(listaLectura);
+			
 			try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw);) {
 				for (Cliente cliente : listaClientes) {
 					bw.write(cliente.toStringSimple());

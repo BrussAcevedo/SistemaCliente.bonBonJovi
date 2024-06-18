@@ -104,7 +104,7 @@ public class RutasServicios {
 			e.printStackTrace();
 		}
 
-		return "No se ha encontrado el rut.";
+		return null;
 	}
 
 	public static ArrayList<Cliente> rutaToArraylist(String ruta) {
