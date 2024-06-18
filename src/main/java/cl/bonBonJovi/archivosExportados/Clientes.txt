@@ -1,2 +1,0 @@
-12341234-3, aaaaaaaa, asdasdddd, 25 Anios, ACTIVO
-12341234-2, bbbbb, asdasdas, 25 Anios, INACTIVO

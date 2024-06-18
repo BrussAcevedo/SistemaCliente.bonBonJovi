@@ -28,7 +28,7 @@ public class ArchivoServicioTest {
 	@Test
 	public void importTest() {
 		logger.info("Testing metodo importar datos Csv de ArchivoServicio");
-		String rutaArchivo = "src\\main\\java\\cl\\bonBonJovi\\archivosImportar";
+		String rutaArchivo = "src\\main\\java\\cl\\bonBonJovi\\archivos\\importacion";
 		String nombreArchivoCsv= "DBClientes";
 		archivoServicio.importarDatosCsv(rutaArchivo , nombreArchivoCsv, listaTest);
 		

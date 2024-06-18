@@ -11,16 +11,21 @@ import cl.bonBonJovi.servicio.ArchivoServicio;
 import cl.bonBonJovi.servicio.ClienteServicio;
 import cl.bonBonJovi.servicio.ExportarCsv;
 import cl.bonBonJovi.servicio.ExportarTxt;
+import cl.bonBonJovi.servicio.RutasServicios;
 import cl.bonBonJovi.utilidades.Utilidad;
 
 public class Menu {
 
 	private List<Cliente> listaNoExportada = new ArrayList<>();
 	private List<Cliente> listaExportada = new ArrayList<>();
+	private List<String> listaDeRutas = new ArrayList<>();
 
 	private ClienteServicio clienteServNoExp = new ClienteServicio(listaNoExportada);
 	private ClienteServicio clienteServExp = new ClienteServicio(listaExportada);
-	private ArchivoServicio archivoServicio = new ArchivoServicio();
+	private ArchivoServicio importarDatos = new ArchivoServicio();
+	private MenuExportar rutasMenu = new MenuExportar();
+	
+	private ArchivoServicio leerDatosYaExportados = new ArchivoServicio();
 	private ExportarCsv exportadorCsv;
 	private ExportarTxt exportarTxt;
 	private String rutaImport;
@@ -31,13 +36,28 @@ public class Menu {
 	private String fileName1 = "DBClientes.csv";
 
 	public void menuPrincipal() {
+		Cliente cliente1 = new Cliente("46545545", "juan", "Juanete", "5 Anios", CategoriaEnum.ACTIVO);
+		Cliente cliente2 = new Cliente("46545545", "Carlos", "Carlete", "6 Anios", CategoriaEnum.INACTIVO);
+		
+		listaNoExportada.add(cliente1);
+		listaNoExportada.add(cliente2);
+		
+		
+		
+		
+		
+		RutasServicios.importarRutas("src/main/java/cl/bonBonJovi/archivos/rutas", "rutasExport", listaDeRutas);
+		
 		boolean estado = false;
 
 		do {
 			System.out.println("1. Listar Clientes\r\n"
 
-					+ "2. Agregar Cliente\r\n" + "3. Editar Cliente\r\n" + "4. Cargar Datos\r\n"// listo
-					+ "5. Exportar Datos\r\n" + "6. Salir\r\n" // Listo
+					+ "2. Agregar Cliente\r\n" 
+					+ "3. Editar Cliente\r\n" 
+					+ "4. Cargar Datos\r\n"
+					+ "5. Exportar Datos\r\n" 
+					+ "6. Salir\r\n" 
 					+ "Ingrese una opción:");
 			String entradaStr = scan.nextLine();
 			int entrada = Integer.parseInt(entradaStr);
@@ -349,10 +369,6 @@ public class Menu {
 		Utilidad.delay3000();
 	}
 
-	public void formatoNuevoDatos() {
-
-	}
-
 	public void importarDatos() {
 		System.out.println("Selecciona la carpeta que contiene los datos a importar: ");
 		rutaImport = "src/main/java/cl/bonBonJovi/archivosImportar";
@@ -361,7 +377,7 @@ public class Menu {
 		String respuesta = scan.nextLine();
 
 		if (respuesta.equals("1")) {
-			archivoServicio.importarDatosCsv(rutaImport, nombreArchivo, listaNoExportada);
+			importarDatos.importarDatosCsv(rutaImport, nombreArchivo, listaNoExportada);
 			System.out.println(listaNoExportada.toString());
 		} else {
 			System.out.println("Opcion no válida. Volviendo al menu Principal...");
@@ -371,7 +387,7 @@ public class Menu {
 	}
 
 	public void exportarDatos() {
-
+		rutasMenu.menuRutas(listaDeRutas, listaNoExportada);
 	}
 
 	public boolean terminarPrograma() {

@@ -13,7 +13,7 @@ public class ExportarCsv extends Exportador {
 
 	@Override
 
-	public void exportar(String ruta, String filename, List<Cliente> listaclientes) {
+	public void exportar(String ruta, String filename, List<Cliente> listaClientes) {
 		File file = new File(ruta + "/" + filename + ".csv");
 
 		if (!file.exists()) {
@@ -24,11 +24,12 @@ public class ExportarCsv extends Exportador {
 		if (file.exists()) {
 
 			try (FileWriter fw = new FileWriter(file); BufferedWriter bw = new BufferedWriter(fw);) {
-				for (Cliente cliente : listaclientes) {
+				for (Cliente cliente : listaClientes) {
 					bw.write(cliente.toStringSimple());
 					bw.newLine();
 				}
-
+				System.out.println("Datos Exportados Correctamente.");
+				listaClientes.clear();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
