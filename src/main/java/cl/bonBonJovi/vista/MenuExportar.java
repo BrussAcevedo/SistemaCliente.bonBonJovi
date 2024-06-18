@@ -23,7 +23,7 @@ public class MenuExportar {
 		
 		
 		if(listaDeRutas.isEmpty()) {
-			listaDeRutas.add("src/main/java/cl/bonBonJovi/archivos/Exportados");
+			listaDeRutas.add("src/main/java/cl/bonBonJovi/archivos/Exportados/Clientes.txt");
 			RutasServicios.exportarRutas("src/main/java/cl/bonBonJovi/archivos/rutas", "rutasExport", listaDeRutas);
 		}
 		
@@ -117,7 +117,7 @@ public class MenuExportar {
 			}
 			else if(resultadoRuta.equals("2")) {
 				
-					System.out.println("Ingresa la ruta para el archivo Clientes.Csv de export: ");
+					System.out.println("Ingresa la ruta para el archivo Clientes(.txt o .csv) de export: ");
 					String nuevaRuta = scan.nextLine();
 					File flBusqueda = new File(nuevaRuta);
 					if(flBusqueda.exists()) {

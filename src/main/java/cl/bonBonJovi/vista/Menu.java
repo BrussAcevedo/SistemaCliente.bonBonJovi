@@ -378,14 +378,14 @@ public class Menu {
 
 	public void importarDatos() {
 		System.out.println("Selecciona la carpeta que contiene los datos a importar: ");
-		rutaImport = "src/main/java/cl/bonBonJovi/archivosImportar";
+		rutaImport = "src/main/java/cl/bonBonJovi/archivos/importacion";
 		String nombreArchivo = "DBClientes";
 		System.out.println("1- Ruta por Default: " + rutaImport + nombreArchivo + ".csv");
 		String respuesta = scan.nextLine();
 
 		if (respuesta.equals("1")) {
 			importarDatos.importarDatosCsv(rutaImport, nombreArchivo, listaNoExportada);
-			System.out.println(listaNoExportada.toString());
+
 		} else {
 			System.out.println("Opcion no válida. Volviendo al menu Principal...");
 			Utilidad.delay3000();
